@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pink Women's Gym and Fitness Center - Customer Management</title>
+    <style>
+        body {
+            background-color: #f2d7e0; /* Light pink */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #dcc9e3; /* Light purple */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #6d3665; /* Dark purple */
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #6d3665; /* Dark purple */
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #4a1d3d; /* Darker purple */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #6d3665; /* Dark purple */
+            color: white;
+        }
+        .delete-btn {
+            background-color: #ff4d4d; /* Red */
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #cc0000; /* Darker red */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Pink Women's Gym and Fitness Center - Customer Management</h1>
+        <form id="customerForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="contact">Contact Information:</label>
+            <input type="text" id="contact" name="contact" required>
+            <label for="membership">Membership Type:</label>
+            <select id="membership" name="membership" required>
+                <option value="Basic">Basic</option>
+                <option value="Standard">Standard</option>
+                <option value="Premium">Premium</option>
+            </select>
+            <input type="submit" value="Add Customer">
+        </form>
+        <hr>
+        <table id="customerTable">
+            <tr>
+                <th>Name</th>
+                <th>Contact Information</th>
+                <th>Membership Type</th>
+                <th>Action</th>
+            </tr>
+            <!-- Customer entries will be dynamically added here -->
+        </table>
+    </div>
+
+    <script>
+        document.getElementById('customerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            addCustomer();
+        });
+
+        function addCustomer() {
+            var name = document.getElementById('name').value;
+            var contact = document.getElementById('contact').value;
+            var membership = document.getElementById('membership').value;
+
+            var table = document.getElementById('customerTable');
+            var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = name;
+            cell2.innerHTML = contact;
+            cell3.innerHTML = membership;
+            cell4.innerHTML = '<button class="delete-btn" onclick="deleteCustomer(this)">Delete</button>';
+
+            document.getElementById('name').value = '';
+            document.getElementById('contact').value = '';
+            document.getElementById('membership').value = 'Basic';
+        }
+
+        function deleteCustomer(row) {
+            var rowIndex = row.parentNode.parentNode.rowIndex;
+            document.getElementById('customerTable').deleteRow(rowIndex);
+        }
+    </script>
+</body>
+</html>
